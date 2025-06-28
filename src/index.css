@@ -3,88 +3,82 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
+/* Blue and White Theme with Dark Mode Support */
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 210 40% 98%;
+    --foreground: 215 25% 27%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 215 25% 27%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 215 25% 27%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 214 32% 91%;
+    --secondary-foreground: 215 25% 27%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 214 32% 91%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 214 32% 91%;
+    --accent-foreground: 215 25% 27%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 217 91% 60%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Custom theme colors */
+    --blue-primary: 217 91% 60%;
+    --blue-secondary: 214 100% 97%;
+    --blue-accent: 210 100% 95%;
+    --text-primary: 215 25% 27%;
+    --text-secondary: 215 20% 65%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 215 28% 17%;
+    --foreground: 213 31% 91%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 215 28% 17%;
+    --card-foreground: 213 31% 91%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 215 28% 17%;
+    --popover-foreground: 213 31% 91%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 215 28% 17%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 215 27% 32%;
+    --secondary-foreground: 213 31% 91%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 215 27% 32%;
+    --muted-foreground: 217 10% 64%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 215 27% 32%;
+    --accent-foreground: 213 31% 91%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 213 31% 91%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 215 27% 32%;
+    --input: 215 27% 32%;
+    --ring: 217 91% 60%;
+
+    /* Dark theme colors */
+    --blue-primary: 217 91% 60%;
+    --blue-secondary: 215 27% 32%;
+    --blue-accent: 215 25% 25%;
+    --text-primary: 213 31% 91%;
+    --text-secondary: 217 10% 64%;
   }
 }
 
@@ -94,27 +88,17 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground transition-colors duration-300;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
   }
-}
 
-/* Custom animations and effects */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { 
-    box-shadow: 0 0 20px rgba(251, 146, 60, 0.3);
-  }
-  50% { 
-    box-shadow: 0 0 30px rgba(251, 146, 60, 0.6);
+  html {
+    scroll-behavior: smooth;
   }
 }
 
-@keyframes slide-up {
+/* Modern animations */
+@keyframes slideUp {
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -125,64 +109,68 @@ All colors MUST be HSL.
   }
 }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .animate-slide-up {
-  animation: slide-up 0.3s ease-out;
+  animation: slideUp 0.4s ease-out;
 }
 
-/* Glassmorphism effects */
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.2s ease-out;
+}
+
+/* Glass morphism effects */
 .glass-card {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.glass-card-strong {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+.dark .glass-card {
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Smooth scroll behavior */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Custom scrollbar */
+/* Modern scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
+  background: hsl(var(--muted));
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
+  background: hsl(var(--primary));
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.5);
+  background: hsl(var(--primary) / 0.8);
 }
 
-/* Focus states */
-button:focus,
-input:focus {
-  outline: none;
-}
-
-/* Hover effects */
+/* Enhanced hover effects */
 .hover-lift {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hover-lift:hover {
@@ -190,63 +178,28 @@ input:focus {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* Task item animations */
-.task-item {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+.dark .hover-lift:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
-.task-item:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+/* Calendar specific styles */
+.calendar-day {
+  @apply aspect-square flex flex-col p-2 rounded-2xl transition-all duration-200;
 }
 
-/* Progress bar animation */
-.progress-bar {
-  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+.calendar-day:hover {
+  @apply bg-blue-50 dark:bg-slate-700 transform scale-105;
 }
 
-/* Responsive text scaling */
-@media (max-width: 768px) {
-  .responsive-text-xl {
-    font-size: 1.125rem;
-  }
-  
-  .responsive-text-2xl {
-    font-size: 1.5rem;
-  }
-  
-  .responsive-text-3xl {
-    font-size: 1.875rem;
-  }
+.calendar-day.today {
+  @apply bg-blue-100 dark:bg-blue-900 ring-2 ring-blue-500;
 }
 
-/* Loading states */
-.skeleton {
-  animation: skeleton-loading 1s linear infinite alternate;
+.calendar-day.has-tasks {
+  @apply bg-gradient-to-br from-blue-500 to-blue-600 text-white;
 }
 
-@keyframes skeleton-loading {
-  0% {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-  100% {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-}
-
-/* Mobile-first responsive utilities */
-.mobile-padding {
-  padding: 1rem;
-}
-
-@media (min-width: 768px) {
-  .mobile-padding {
-    padding: 2rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .mobile-padding {
-    padding: 3rem;
-  }
+/* Task indicators */
+.task-dot {
+  @apply w-2 h-2 rounded-full;
 }

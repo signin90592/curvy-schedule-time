@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, Plus } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Plus, Circle } from 'lucide-react';
 import { useTaskManager, Task } from '../hooks/useTaskManager';
 
 interface CalendarViewProps {
@@ -63,93 +63,99 @@ const CalendarView: React.FC<CalendarViewProps> = ({ onAddTask, onTaskClick }) =
   const days = getDaysInMonth(currentDate);
 
   return (
-    <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6">
-      {/* Calendar Header */}
-      <div className="flex items-center justify-between mb-6">
-        <button
-          onClick={() => navigateMonth('prev')}
-          className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors"
-        >
-          <ChevronLeft className="w-5 h-5 text-white" />
-        </button>
-        
-        <h2 className="text-2xl font-bold text-white">
-          {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
-        </h2>
-        
-        <button
-          onClick={() => navigateMonth('next')}
-          className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors"
-        >
-          <ChevronRight className="w-5 h-5 text-white" />
-        </button>
+    <div className="space-y-6">
+      <div className="text-center mb-8">
+        <h1 className="text-3xl font-bold text-foreground mb-2">Calendar</h1>
+        <p className="text-muted-foreground">Manage your schedule</p>
       </div>
 
-      {/* Day Names */}
-      <div className="grid grid-cols-7 gap-2 mb-4">
-        {dayNames.map(day => (
-          <div key={day} className="text-center text-white/70 font-medium py-2">
-            {day}
-          </div>
-        ))}
-      </div>
+      <div className="glass-card rounded-3xl p-6 animate-slide-up">
+        {/* Calendar Header */}
+        <div className="flex items-center justify-between mb-6">
+          <button
+            onClick={() => navigateMonth('prev')}
+            className="p-3 rounded-2xl bg-primary/10 hover:bg-primary/20 text-primary transition-colors"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          
+          <h2 className="text-2xl font-bold text-foreground">
+            {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
+          </h2>
+          
+          <button
+            onClick={() => navigateMonth('next')}
+            className="p-3 rounded-2xl bg-primary/10 hover:bg-primary/20 text-primary transition-colors"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
 
-      {/* Calendar Grid */}
-      <div className="grid grid-cols-7 gap-2">
-        {days.map((day, index) => {
-          if (!day) {
-            return <div key={index} className="h-24"></div>;
-          }
+        {/* Day Names */}
+        <div className="grid grid-cols-7 gap-2 mb-4">
+          {dayNames.map(day => (
+            <div key={day} className="text-center text-muted-foreground font-medium py-3">
+              {day}
+            </div>
+          ))}
+        </div>
 
-          const dateString = formatDateString(day);
-          const tasksForDay = getTasksForDate(dateString);
-          const isToday = new Date().toDateString() === new Date(dateString).toDateString();
+        {/* Calendar Grid */}
+        <div className="grid grid-cols-7 gap-2">
+          {days.map((day, index) => {
+            if (!day) {
+              return <div key={index} className="aspect-square"></div>;
+            }
 
-          return (
-            <div
-              key={day}
-              className={`h-24 bg-white/10 rounded-xl p-2 relative hover:bg-white/20 transition-colors cursor-pointer ${
-                isToday ? 'ring-2 ring-white/50' : ''
-              }`}
-              onClick={() => onAddTask(dateString)}
-            >
-              <div className="text-white font-medium mb-1">{day}</div>
-              
-              {/* Task indicators */}
-              <div className="space-y-1">
-                {tasksForDay.slice(0, 2).map(task => (
-                  <div
-                    key={task.id}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onTaskClick(task);
-                    }}
-                    className={`text-xs px-2 py-1 rounded-full text-white truncate cursor-pointer hover:scale-105 transition-transform ${
-                      task.category === 'work' 
-                        ? 'bg-blue-500/80' 
-                        : 'bg-green-500/80'
-                    }`}
-                  >
-                    {task.time} {task.title}
-                  </div>
-                ))}
+            const dateString = formatDateString(day);
+            const tasksForDay = getTasksForDate(dateString);
+            const isToday = new Date().toDateString() === new Date(dateString).toDateString();
+
+            return (
+              <div
+                key={day}
+                className={`calendar-day ${isToday ? 'today' : ''} ${tasksForDay.length > 0 ? 'has-tasks' : 'bg-card hover:bg-muted'}`}
+                onClick={() => onAddTask(dateString)}
+              >
+                <div className={`font-semibold mb-2 ${tasksForDay.length > 0 ? 'text-white' : 'text-foreground'}`}>
+                  {day}
+                </div>
                 
-                {tasksForDay.length > 2 && (
-                  <div className="text-xs text-white/70 text-center">
-                    +{tasksForDay.length - 2} more
+                {/* Task indicators */}
+                <div className="flex-1 space-y-1">
+                  {tasksForDay.slice(0, 3).map(task => (
+                    <div
+                      key={task.id}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onTaskClick(task);
+                      }}
+                      className="flex items-center space-x-1 cursor-pointer group"
+                    >
+                      <Circle className={`w-2 h-2 ${task.category === 'work' ? 'text-blue-300' : 'text-green-300'} ${tasksForDay.length > 0 ? 'fill-current' : ''}`} />
+                      <span className={`text-xs truncate ${tasksForDay.length > 0 ? 'text-white/90' : 'text-muted-foreground'}`}>
+                        {task.title}
+                      </span>
+                    </div>
+                  ))}
+                  
+                  {tasksForDay.length > 3 && (
+                    <div className={`text-xs ${tasksForDay.length > 0 ? 'text-white/70' : 'text-muted-foreground'}`}>
+                      +{tasksForDay.length - 3} more
+                    </div>
+                  )}
+                </div>
+
+                {/* Add task button */}
+                {tasksForDay.length === 0 && (
+                  <div className="opacity-0 group-hover:opacity-100 transition-opacity absolute inset-0 flex items-center justify-center">
+                    <Plus className="w-4 h-4 text-muted-foreground" />
                   </div>
                 )}
               </div>
-
-              {/* Add task button */}
-              {tasksForDay.length === 0 && (
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                  <Plus className="w-4 h-4 text-white/50" />
-                </div>
-              )}
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   );

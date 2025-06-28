@@ -45,13 +45,13 @@ const TaskList: React.FC<TaskListProps> = ({
   };
 
   return (
-    <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6">
-      <h2 className="text-2xl font-bold text-white mb-6">{title}</h2>
+    <div className="glass-card rounded-3xl p-6 animate-slide-up">
+      <h2 className="text-2xl font-bold text-foreground mb-6">{title}</h2>
       
       {tasks.length === 0 ? (
         <div className="text-center py-12">
-          <Clock className="w-12 h-12 text-white/30 mx-auto mb-4" />
-          <p className="text-white/60">No tasks found</p>
+          <Clock className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+          <p className="text-muted-foreground">No tasks found</p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -59,7 +59,7 @@ const TaskList: React.FC<TaskListProps> = ({
             <div
               key={task.id}
               onClick={() => onTaskClick(task)}
-              className={`bg-white/90 backdrop-blur-sm rounded-2xl p-4 cursor-pointer transition-all duration-300 hover:scale-105 ${
+              className={`bg-card border border-border rounded-2xl p-4 cursor-pointer hover-lift ${
                 task.completed ? 'opacity-60' : ''
               }`}
             >
@@ -73,7 +73,7 @@ const TaskList: React.FC<TaskListProps> = ({
                     className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${
                       task.completed
                         ? 'bg-green-500 border-green-500'
-                        : 'border-gray-300 hover:border-orange-400'
+                        : 'border-muted-foreground hover:border-primary'
                     }`}
                   >
                     {task.completed && <CheckCircle className="w-4 h-4 text-white" />}
@@ -81,12 +81,12 @@ const TaskList: React.FC<TaskListProps> = ({
                   
                   <div>
                     <h3 className={`font-semibold text-lg ${
-                      task.completed ? 'line-through text-gray-500' : 'text-gray-800'
+                      task.completed ? 'line-through text-muted-foreground' : 'text-foreground'
                     }`}>
                       {task.title}
                     </h3>
                     {task.description && (
-                      <p className="text-sm text-gray-600 mt-1">{task.description}</p>
+                      <p className="text-sm text-muted-foreground mt-1">{task.description}</p>
                     )}
                   </div>
                 </div>
@@ -95,8 +95,8 @@ const TaskList: React.FC<TaskListProps> = ({
                   {getPriorityIcon(task.priority)}
                   <div className={`px-3 py-1 rounded-full text-xs font-medium flex items-center space-x-1 ${
                     task.category === 'work' 
-                      ? 'bg-blue-100 text-blue-700' 
-                      : 'bg-green-100 text-green-700'
+                      ? 'bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300' 
+                      : 'bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-300'
                   }`}>
                     {task.category === 'work' ? <Briefcase className="w-3 h-3" /> : <User className="w-3 h-3" />}
                     <span className="capitalize">{task.category}</span>
@@ -104,7 +104,7 @@ const TaskList: React.FC<TaskListProps> = ({
                 </div>
               </div>
               
-              <div className="flex items-center justify-between text-sm text-gray-600">
+              <div className="flex items-center justify-between text-sm text-muted-foreground">
                 <div className="flex items-center space-x-4">
                   <span className="flex items-center space-x-1">
                     <Clock className="w-4 h-4" />
@@ -113,9 +113,9 @@ const TaskList: React.FC<TaskListProps> = ({
                   <span>{formatDate(task.date)}</span>
                 </div>
                 <span className={`px-2 py-1 rounded-full text-xs ${
-                  task.priority === 'high' ? 'bg-red-100 text-red-700' :
-                  task.priority === 'medium' ? 'bg-yellow-100 text-yellow-700' :
-                  'bg-gray-100 text-gray-700'
+                  task.priority === 'high' ? 'bg-red-100 dark:bg-red-900/20 text-red-700 dark:text-red-300' :
+                  task.priority === 'medium' ? 'bg-yellow-100 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-300' :
+                  'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300'
                 }`}>
                   {task.priority} priority
                 </span>
